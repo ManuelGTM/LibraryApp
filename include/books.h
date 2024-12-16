@@ -5,14 +5,15 @@
 
 class Book {
 
-  std::string ISBN;
+  static int ISBNCounter;
+  int ISBN;
   std::string title;
   std::string author;
   int quantity;
   char status;
 
 public:
-  Book(std::string, std::string, std::string, int);
+  Book(std::string, std::string, int);
 
   void showInfo(Book &b);
   void borrowBook();
@@ -21,14 +22,14 @@ public:
 
   // Setters
   //
-  void setISBN(std::string);
+  void setISBN(int);
   void setTitle(std::string);
   void setAuthor(std::string);
   void setQuantity(int);
   void setStatus(char);
 
   // Getters
-  std::string getISBN();
+  int getISBN();
   std::string getTitle();
   std::string getAuthor();
   int getTotalQuantity();

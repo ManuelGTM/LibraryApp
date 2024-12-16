@@ -1,11 +1,17 @@
-#include "../include/books.h"
+#include "../../include/books.h"
 #include <iostream>
 using namespace std;
 
+// Variable global
+
+int Book::ISBNCounter = 0;
+
 // Book Constructor
-Book::Book(string ISBN, string title, string author, int quantity)
-    : ISBN(ISBN), title(title), author(author), quantity(quantity),
-      status('A') {}
+Book::Book(string title, string author, int quantity)
+    : title(title), author(author), quantity(quantity), status('A') {
+
+  ISBN = ++ISBNCounter;
+}
 
 // Book Info
 void Book::showInfo(Book &b) {
@@ -21,7 +27,7 @@ void Book::showInfo(Book &b) {
 // Borrow book fuctions
 void Book::borrowBook() {
 
-  if (quantity > 0) {
+  if (quantity >= 0) {
     --quantity;
   }
 
@@ -33,14 +39,14 @@ void Book::returnBook() { ++quantity; }
 bool Book::isAvailable() const { return quantity > 0; }
 
 // Setters
-void Book::setISBN(std::string _ISBN) { ISBN = _ISBN; }
+void Book::setISBN(int _ISBN) { ISBN = _ISBN; }
 void Book::setTitle(std::string _title) { title = _title; };
 void Book::setAuthor(std::string _author) { author = _author; }
 void Book::setQuantity(int _quantity) { quantity = _quantity; };
 void Book::setStatus(char _status) { status = _status; };
 
 // Getters
-std::string Book::getISBN() { return ISBN; };
+int Book::getISBN() { return ISBN; };
 std::string Book::getTitle() { return title; };
 std::string Book::getAuthor() { return author; };
 int Book::getTotalQuantity() { return quantity; };

@@ -7,13 +7,14 @@
 
 class User {
 
-  std::string idUser;
+  static int idCounter;
+  int idUser;
   std::string name;
   std::vector<Book> borrowedBooks;
   char status;
 
 public:
-  User(std::string, std::string);
+  User(std::string);
 
   void requestBorrowBook(Book b);
   void returnBook(Book &b);
@@ -21,12 +22,12 @@ public:
 
   // Setters
   //
-  void setIdUser(std::string);
+  void setIdUser(int);
   void setName(std::string);
   void setStatus(char);
 
   // Getters
-  std::string getIdUser();
+  int getIdUser();
   std::string getName();
   char getStatus();
   std::vector<Book> getBorrowedBooks();

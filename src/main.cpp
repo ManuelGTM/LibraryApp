@@ -1,26 +1,43 @@
 #include "../include/books.h"
 #include "../include/library.h"
+#include "../include/menu.h"
 #include "../include/users.h"
 #include <iostream>
 using namespace std;
 
 int main() {
 
-  Library library;
-  User user1("01", "Manuel");
-  Book book1("001", "C++development", "Manuel", 5);
+  // Todo for tomorrow
+  // Finish the menus Boring :(
 
-  library.addBook("001", "C++development", "Manuel", 5);
-  library.registerUser("01", "Manuel");
+  int opt;
 
-  library.showBookInfo();
-  library.showUserInfo();
+  do {
 
-  library.processBorrowing("01", "001");
-  library.showBookInfo();
-  library.showUserInfo();
+    switch (opt) {
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    case 8:
+      break;
+    case 9:
+      break;
 
-  /*cout << user1.getName() << endl;*/
+    default:
+      cout << "Incorrect Option";
+    }
+  } while (opt != 9);
 
   return 0;
 }
