@@ -12,25 +12,23 @@ class Library {
   std::vector<User> users;
 
 public:
-  Library();
+  void addBook(std::string, std::string, int);
 
-  void addBook(std::string title, std::string author, int quantity);
+  Book *checkBook(int);
+  User *checkUser(int);
 
-  Book *checkBook(int ISBN);
-  User *checkUser(int idUser);
-
-  bool dataValidation(Book *b, User *u);
+  bool dataValidation(Book *, User *);
   void registerUser(std::string);
 
-  void processReturning(int idUser, int ISBN);
-  void processBorrowing(int _idUser, int ISBN);
+  void processReturning(int, int);
+  void processBorrowing(int, int);
 
   void showBookInfo();
   void showUserInfo();
 
   // getters
-  std::vector<User> getUsers();
-  std::vector<Book> getBooks();
+  std::vector<User> getUsers() const;
+  std::vector<Book> getBooks() const;
 };
 
 #endif

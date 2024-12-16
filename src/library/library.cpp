@@ -6,18 +6,15 @@
 #include <vector>
 using namespace std;
 
-// Library Methods and Constructors
-Library::Library() { cout << "Library initialized" << endl; }
-
 // Book registration
 void Library::addBook(string title, string author, int quantity) {
 
   Book newBook(title, author, quantity);
 
-  Book *tempBook = checkBook(newBook.getISBN());
+  Book *tempBook = checkBook(newBook.getId());
 
   if (tempBook != nullptr) {
-    cout << "Error: The book already exists with ID:" << newBook.getISBN()
+    cout << "Error: The book already exists with ID:" << newBook.getId()
          << endl;
     return;
   }
@@ -36,7 +33,7 @@ void Library::addBook(string title, string author, int quantity) {
 void Library::registerUser(string name) {
 
   User newUser(name);
-  User *tempUser = checkUser(newUser.getIdUser());
+  User *tempUser = checkUser(newUser.getId());
 
   // Data validation
   if (tempUser != nullptr) {
@@ -51,7 +48,7 @@ void Library::registerUser(string name) {
 
   // User data validated and registration process
   users.push_back(newUser);
-  cout << "User added successfully: Id( " << newUser.getIdUser() << " ) "
+  cout << "User added successfully: Id( " << newUser.getId() << " ) "
        << "name ( " << name << " )" << endl;
 }
 
@@ -120,7 +117,7 @@ bool Library::dataValidation(Book *b, User *u) {
 // User existence check
 User *Library::checkUser(int idUser) {
   for (User &u : users) {
-    if (idUser == u.getIdUser()) {
+    if (idUser == u.getId()) {
       return &u;
     }
   }
@@ -131,7 +128,7 @@ User *Library::checkUser(int idUser) {
 // Book existence check
 Book *Library::checkBook(int ISBN) {
   for (Book &b : books) {
-    if (ISBN == b.getISBN()) {
+    if (ISBN == b.getId()) {
       return &b;
     }
   }
@@ -141,15 +138,15 @@ Book *Library::checkBook(int ISBN) {
 // Showing the books information
 void Library::showBookInfo() {
   for (Book &n : books) {
-    n.showInfo(n);
+    n.listInfo(n);
   }
 }
 
 void Library::showUserInfo() {
   for (User &u : users) {
-    u.showUser(u);
+    u.listInfo(u);
   }
 }
 
-std::vector<User> Library::getUsers() { return users; }
-std::vector<Book> Library::getBooks() { return books; }
+std::vector<User> Library::getUsers() const { return users; }
+std::vector<Book> Library::getBooks() const { return books; }

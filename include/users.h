@@ -18,7 +18,10 @@ public:
 
   void requestBorrowBook(Book b);
   void returnBook(Book &b);
-  void showUser(User &u);
+
+  void showBorrowedBooks() const;
+  void listInfo(const User &u) const;
+  void showDetails(const User &u) const;
 
   // Setters
   //
@@ -27,11 +30,10 @@ public:
   void setStatus(char);
 
   // Getters
-  int getIdUser();
-  std::string getName();
-  char getStatus();
-  std::vector<Book> getBorrowedBooks();
-  void showBorrowedBooks();
+  int getId() const;
+  std::string getName() const;
+  char getStatus() const;
+  std::vector<Book> getBorrowedBooks() const;
 };
 
 #endif

@@ -1,19 +1,24 @@
 #include "../../include/menu.h"
 #include "../../include/books.h"
-#include "../../include/library.h"
 #include "../../include/users.h"
 #include <iostream>
 using namespace std;
 
-Menu::Menu() { cout << "New Menu" << endl; }
-
 void Menu::displayHeader(const std::string &title) {
 
-  cout << "\033[1;36m"; // Cambia el color del texto a cyan
   cout << "==============================================\n";
-  cout << "              " << title << "               \n";
+  cout << "|\t          " << title << "\t                     | \n";
   cout << "==============================================\n";
-  cout << "\033[0m"; // Resetea el color
+}
+
+void Menu::Title(string name) {
+
+  cout << "| ID  " << "\t\t" << name << "\t\t  Status     |\n";
+  cout << "==============================================\n";
+}
+
+void Menu::Footer() {
+  cout << "==============================================\n";
 }
 
 void Menu::principalMenu() {
@@ -31,6 +36,7 @@ void Menu::principalMenu() {
   cout << "Choose an option: ";
 }
 
+// TODO tomorrow
 void Menu::userRegistrationMenu() {
   displayHeader("User Registration");
   cout << "Enter the user data:\n";
@@ -54,21 +60,30 @@ void Menu::returnProcessMenu() {
   cout << "User Id: ";
 }
 
+// Users Table
 void Menu::viewUsersMenu(const std::vector<User> &users) {
   displayHeader("Users");
+  Title("Users");
+  MenuInfo(users);
+  Footer();
+  cout << endl;
+  cout << "Select Book Id: ";
 }
-void Menu::viewsUserDetails(const int &userId, const std::vector<User> &users) {
 
-  displayHeader("User Details");
-  cout << "Select User Id: ";
-}
+// Books Table
 void Menu::viewBooksMenu(const std::vector<Book> &books) {
 
   displayHeader("Books");
+  Title("Book");
+  MenuInfo(books);
+  Footer();
+  cout << endl;
   cout << "Select Book Id: ";
 }
-void Menu::viewsBookDetails(const int &ISBN, const std::vector<Book> &books) {
 
-  displayHeader("Books Details");
-  cout << "Select Book Id: ";
-}
+/*void Menu::viewsBookDetails(const int &ISBN, const std::vector<Book> &books)
+ * {*/
+/*  displayHeader("Books Details");*/
+/**/
+/*  cout << "Select Book Id: ";*/
+/*}*/

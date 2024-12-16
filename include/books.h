@@ -15,13 +15,14 @@ class Book {
 public:
   Book(std::string, std::string, int);
 
-  void showInfo(Book &b);
+  void showDetails(const Book &b) const;
   void borrowBook();
   void returnBook();
   bool isAvailable() const;
 
+  void listInfo(const Book &b) const;
+
   // Setters
-  //
   void setISBN(int);
   void setTitle(std::string);
   void setAuthor(std::string);
@@ -29,11 +30,11 @@ public:
   void setStatus(char);
 
   // Getters
-  int getISBN();
-  std::string getTitle();
-  std::string getAuthor();
-  int getTotalQuantity();
-  char getStatus();
+  int getId() const;
+  std::string getTitle() const;
+  std::string getAuthor() const;
+  int getTotalQuantity() const;
+  char getStatus() const;
 };
 
 #endif // !BOOK_H

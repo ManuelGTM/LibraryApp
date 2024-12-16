@@ -14,15 +14,22 @@ Book::Book(string title, string author, int quantity)
 }
 
 // Book Info
-void Book::showInfo(Book &b) {
-  cout << "---------------------------------------------" << endl;
-  cout << "Titulo: " << b.getTitle() << endl;
+void Book::showDetails(const Book &b) const {
+  cout << "==============================================\n";
+  cout << "\t          " << "Book" << endl;
+  cout << "==============================================\n";
+  cout << "ISBN: " << b.getId() << endl;
+  cout << "Title: " << b.getTitle() << endl;
   cout << "Author: " << b.getAuthor() << endl;
-  cout << "ISBN: " << b.getISBN() << endl;
   cout << "Remaining Copies: " << b.getTotalQuantity() << endl;
   cout << "Total Copies: " << b.getTotalQuantity() << endl;
-  cout << "---------------------------------------------" << endl;
+  cout << "==============================================\n";
 };
+
+void Book::listInfo(const Book &b) const {
+  cout << "| " << b.getId() << "\t     | " << b.getTitle() << "\t\t|     "
+       << b.getStatus() << "\t     |" << endl;
+}
 
 // Borrow book fuctions
 void Book::borrowBook() {
@@ -46,8 +53,8 @@ void Book::setQuantity(int _quantity) { quantity = _quantity; };
 void Book::setStatus(char _status) { status = _status; };
 
 // Getters
-int Book::getISBN() { return ISBN; };
-std::string Book::getTitle() { return title; };
-std::string Book::getAuthor() { return author; };
-int Book::getTotalQuantity() { return quantity; };
-char Book::getStatus() { return status; };
+int Book::getId() const { return ISBN; };
+std::string Book::getTitle() const { return title; };
+std::string Book::getAuthor() const { return author; };
+int Book::getTotalQuantity() const { return quantity; };
+char Book::getStatus() const { return status; };
