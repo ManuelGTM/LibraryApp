@@ -16,8 +16,7 @@ int main() {
 
   Menu menu;
   Library library;
-
-  int opt = 0;
+  int opt;
 
   do {
     clear();
@@ -33,20 +32,18 @@ int main() {
       pause();
       break;
     case 3:
-      menu.borrowProcessMenu();
+      menu.borrowProcessMenu(library.getUsers(), library.getBooks(), library);
       pause();
       break;
     case 4:
-      menu.returnProcessMenu();
+      menu.returnProcessMenu(library.getUsers(), library);
       pause();
       break;
     case 5:
       menu.viewUsersMenu(library.getUsers());
-      pause();
       break;
     case 6:
       menu.viewBooksMenu(library.getBooks());
-      pause();
       break;
     case 7:
       break;
@@ -61,8 +58,8 @@ int main() {
 
 void pause() {
   cout << "\nPresione Enter para continuar...";
-  cin.ignore(); // Ignora el último salto de línea en el buffer
-  cin.get();    // Espera que se presione Enter
+  cin.ignore();
+  cin.get();
 }
 
 void clear() { system("clear"); }

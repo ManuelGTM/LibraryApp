@@ -6,8 +6,15 @@
 #include "users.h"
 #include <cstdlib>
 #include <iostream>
+#include <limits>
 #include <string>
 #include <vector>
+
+#define GREEN "\033[1;32m"
+#define YELLOW "\033[1;33m"
+#define WHITE "\033[1;37m"
+#define RED "\033[1;31m"
+#define RESET "\033[0m"
 
 class Menu {
 
@@ -21,9 +28,11 @@ public:
   void userRegistrationMenu(Library &l);
   void bookRegistrationMenu(Library &l);
 
-  void borrowProcessMenu();
-  void returnProcessMenu();
+  void borrowProcessMenu(const std::vector<User> &users,
+                         const std::vector<Book> &books, Library &l);
+  void returnProcessMenu(const std::vector<User> &users, Library &l);
 
+  void showBorrowedBooks(const std::vector<User> &users, int userId);
   void viewUsersMenu(const std::vector<User> &users);
   void viewBooksMenu(const std::vector<Book> &books);
 
@@ -35,50 +44,66 @@ public:
     }
   }
 
+  // Show User and Book details
   template <typename G>
   void viewDetails(const int &Id, const std::vector<G> &items) {
-    int pos = 0;
-    bool isEqual = false;
-
+    int pos = -1; // Inicializa en -1
     for (size_t i = 0; i < items.size(); i++) {
       if (Id == items[i].getId()) {
-        isEqual = true;
+        pos = i; // Encuentra la posición
         break;
-      } else {
-        pos = -1;
-      }
-
-      if (pos != -1) {
-        items[pos].showDetails(items[pos]);
-        std::cout << "\nPresione Enter para continuar...";
-        std::cin.ignore(); // Ignora el último salto de línea en el buffer
-        std::cin.get();
-        viewDetails(Id, items);
       }
     }
 
-    template <typename T>
-    void checkForDetails(int opt, std::string name,
-                         const std::vector<T> &data) {
-      if (opt == 1) {
-        system("clear");
+    clear();
 
-        displayHeader(name);
-        Title(name);
-        MenuInfo(data);
-        Footer();
-        std::cout << std::endl;
+    if (pos >= 0) {                       // Si el índice es válido
+      items[pos].showDetails(items[pos]); // Muestra los detalles
+      std::cout << "\n"
+                << YELLOW << "Press any key to return to the main menu..."
+                << RESET;
+      pause();
+    } else {
+      std::cout << RED << "User not found.\n" << RESET;
+      pause();
+    }
+  }
 
-        int id;
-        std::cout << "Select " << name << " Id to see details: ";
-        std::cin >> id;
+  template <typename T>
+  void checkForDetails(int opt, const std::string &name,
+                       const std::vector<T> &data) {
+    switch (opt) {
+    case 1:
+      clear();
 
-        system("clear");
+      displayHeader(name);
+      Title(name);
+      MenuInfo(data);
+      Footer();
 
-        viewDetails(id, data);
-      }
+      std::cout << "\n" << GREEN << "Enter the " << name << " ID: " << RESET;
+      int id;
+      std::cin >> id;
+
+      viewDetails(id, data);
+      break;
+
+    case 2:
+      std::cout << YELLOW << "Returning to main menu...\n" << RESET;
       principalMenu();
+      break;
+
+    default:
+      std::cout << RED << "Invalid option. Try again.\n" << RESET;
+      break;
     }
-  };
+  }
+
+  void pause() {
+    std::cin.ignore();
+    std::cin.get(); // Espera entrada del usuario
+  }
+  void clear() { system("clear"); }
+};
 
 #endif

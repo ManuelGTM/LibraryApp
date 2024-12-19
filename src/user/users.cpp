@@ -3,12 +3,17 @@
 #include <vector>
 using namespace std;
 
-// Variable Global
+// Color codes
+#define GREEN "\033[1;32m"
+#define YELLOW "\033[1;33m"
+#define WHITE "\033[1;37m"
+#define RED "\033[1;31m"
+#define RESET "\033[0m"
 
+// Variable Global
 int User::idCounter = 0;
 
-// User Contructor
-
+// User Constructor
 User::User(string name) : name(name), borrowedBooks(), status('A') {
   idUser = ++idCounter;
 }
@@ -30,20 +35,20 @@ void User::returnBook(Book &b) {
       return;                       // exiting from the function
     }
   }
-  cout << "Error: The book was not found in borrowed books." << endl;
+  cout << RED << "Error: The book was not found in borrowed books." << RESET << endl;
 };
 
 void User::showBorrowedBooks() const {
 
   if (borrowedBooks.empty()) {
-    cout << " Borrowed Books: No borrowed books";
+    cout << YELLOW << "Borrowed Books: No borrowed books" << RESET << endl;
     return;
   }
 
-  cout << " Borrowed Books: ";
+  cout << GREEN << "Borrowed Books: " << RESET;
 
   for (size_t i = 0; i < borrowedBooks.size(); i++) {
-    cout << borrowedBooks[i].getTitle();
+    cout << GREEN << borrowedBooks[i].getTitle() << RESET;
 
     if (i < borrowedBooks.size() - 1) {
       cout << ", ";
@@ -54,27 +59,41 @@ void User::showBorrowedBooks() const {
       cout << "\t\t ";
     }
   }
+  cout << endl;
 }
 
-// User information
+void User::showBorrowedBooksByUser() const {
+
+  if (borrowedBooks.empty()) {
+    cout << YELLOW << "No borrowed books" << RESET << endl;
+    return;
+  }
+
+  for (size_t i = 0; i < borrowedBooks.size(); i++) {
+    cout << "| " << borrowedBooks[i].getId() << "\t| "
+         << borrowedBooks[i].getTitle() << "\t| "
+         << borrowedBooks[i].getAuthor() << "\t| "
+         << borrowedBooks[i].getStatus() << "\t|" << endl;
+  }
+}
+
 void User::showDetails(const User &u) const {
-  cout << "==============================================\n";
+  cout << GREEN << "==============================================\n" << RESET;
   cout << "\t          " << "User" << endl;
-  cout << "==============================================\n";
-  cout << " IdUser: " << u.getId() << endl;
-  cout << " Name: " << u.getName() << endl;
+  cout << GREEN << "==============================================\n" << RESET;
+  cout << WHITE << "IdUser: " << u.getId() << endl;
+  cout << "Name: " << u.getName() << endl;
   showBorrowedBooks();
-  cout << "\n Status: " << u.getStatus() << endl;
-  cout << "==============================================\n";
+  cout << WHITE << "\nStatus: " << u.getStatus() << endl;
+  cout << GREEN << "==============================================\n" << RESET;
 };
 
 void User::listInfo(const User &u) const {
-  cout << "| " << u.getId() << "\t    |  " << u.getName() << "\t\t|  "
+  cout << YELLOW << "| " << u.getId() << "\t    |  " << u.getName() << "\t\t|  "
        << u.getStatus() << "\t     |" << endl;
 }
 
 // Setters
-//
 void User::setIdUser(int _idUser) { idUser = _idUser; };
 void User::setName(std::string _name) { name = _name; }
 void User::setStatus(char _status) { status = _status; };
@@ -85,3 +104,4 @@ std::string User::getName() const { return name; };
 char User::getStatus() const { return status; };
 
 std::vector<Book> User::getBorrowedBooks() const { return borrowedBooks; };
+

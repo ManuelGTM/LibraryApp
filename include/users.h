@@ -20,6 +20,7 @@ public:
   void returnBook(Book &b);
 
   void showBorrowedBooks() const;
+  void showBorrowedBooksByUser() const;
   void listInfo(const User &u) const;
   void showDetails(const User &u) const;
 

@@ -2,6 +2,12 @@
 #include <iostream>
 using namespace std;
 
+// Color codes
+#define GREEN "\033[1;32m"
+#define YELLOW "\033[1;33m"
+#define WHITE "\033[1;37m"
+#define RED "\033[1;31m"
+#define RESET "\033[0m"
 // Variable global
 
 int Book::ISBNCounter = 0;
@@ -15,20 +21,32 @@ Book::Book(string title, string author, int quantity)
 
 // Book Info
 void Book::showDetails(const Book &b) const {
-  cout << "==============================================\n";
-  cout << "\t          " << "Book" << endl;
-  cout << "==============================================\n";
-  cout << "ISBN: " << b.getId() << endl;
-  cout << "Title: " << b.getTitle() << endl;
-  cout << "Author: " << b.getAuthor() << endl;
-  cout << "Remaining Copies: " << b.getTotalQuantity() << endl;
-  cout << "Total Copies: " << b.getTotalQuantity() << endl;
-  cout << "==============================================\n";
+  // Fondo gris claro, texto oscuro
+  cout << "\033[1;37m\033[48;5;235m============================================"
+          "==\033[0m\n"; // Fondo gris claro, texto blanco
+  cout << "\033[1;32m\t          " << "Book"
+       << "\033[0m\n"; // Texto verde claro
+  cout << "\033[1;37m\033[48;5;235m============================================"
+          "==\033[0m\n"; // Fondo gris claro, texto blanco
+
+  // Detalles con texto amarillo suave
+  cout << "\033[1;33mISBN:\033[0m " << b.getId()
+       << endl; // Texto amarillo suave
+  cout << "\033[1;33mTitle:\033[0m " << b.getTitle()
+       << endl; // Texto amarillo suave
+  cout << "\033[1;33mAuthor:\033[0m " << b.getAuthor()
+       << endl; // Texto amarillo suave
+  cout << "\033[1;33mRemaining Copies:\033[0m " << b.getTotalQuantity()
+       << endl; // Texto amarillo suave
+
+  // Fondo gris claro, texto blanco
+  cout << "\033[1;37m\033[48;5;235m============================================"
+          "==\033[0m\n"; // Fondo gris claro, texto blanco
 };
 
 void Book::listInfo(const Book &b) const {
-  cout << "| " << b.getId() << "\t     | " << b.getTitle() << "\t\t|     "
-       << b.getStatus() << "\t     |" << endl;
+  cout << YELLOW << "| " << b.getId() << "\t     | " << b.getTitle()
+       << "\t\t|     " << b.getStatus() << "\t     |" << endl;
 }
 
 // Borrow book fuctions
