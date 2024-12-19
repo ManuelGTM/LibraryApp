@@ -10,7 +10,7 @@ void Menu::displayHeader(const std::string &title) {
 
   system("clear");
   cout << "==============================================\n";
-  cout << "|\t          " << title << "\t                     | \n";
+  cout << "\t          " << title << "\t                 \n";
   cout << "==============================================\n";
 }
 
@@ -24,7 +24,7 @@ void Menu::Footer() {
   cout << "==============================================\n";
 }
 
-void Menu::principalMenu(int &opt) {
+void Menu::principalMenu() {
   displayHeader("Main Menu");
   cout << "\033[1;32m"; // Cambia el color a verde
   cout << "1. Register User\n";
@@ -36,7 +36,6 @@ void Menu::principalMenu(int &opt) {
   cout << "7. Exit\n";
   cout << "\033[0m"; // Resetea el color
   cout << "Choose an option: ";
-  cin >> opt;
 }
 
 // TODO tomorrow

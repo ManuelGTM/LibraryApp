@@ -16,7 +16,7 @@ public:
   void Title(std::string);
   void Footer();
 
-  void principalMenu(int &opt);
+  void principalMenu();
 
   void userRegistrationMenu(Library &l);
   void bookRegistrationMenu(Library &l);
@@ -38,46 +38,47 @@ public:
   template <typename G>
   void viewDetails(const int &Id, const std::vector<G> &items) {
     int pos = 0;
+    bool isEqual = false;
 
     for (size_t i = 0; i < items.size(); i++) {
       if (Id == items[i].getId()) {
-        pos = i;
+        isEqual = true;
         break;
       } else {
         pos = -1;
       }
+
+      if (pos != -1) {
+        items[pos].showDetails(items[pos]);
+        std::cout << "\nPresione Enter para continuar...";
+        std::cin.ignore(); // Ignora el último salto de línea en el buffer
+        std::cin.get();
+        viewDetails(Id, items);
+      }
     }
 
-    if (pos != -1) {
-      items[pos].showDetails(items[pos]);
-      std::cout << "\nPresione Enter para continuar...";
-      std::cin.ignore(); // Ignora el último salto de línea en el buffer
-      std::cin.get();
-      viewDetails(Id, items);
+    template <typename T>
+    void checkForDetails(int opt, std::string name,
+                         const std::vector<T> &data) {
+      if (opt == 1) {
+        system("clear");
+
+        displayHeader(name);
+        Title(name);
+        MenuInfo(data);
+        Footer();
+        std::cout << std::endl;
+
+        int id;
+        std::cout << "Select " << name << " Id to see details: ";
+        std::cin >> id;
+
+        system("clear");
+
+        viewDetails(id, data);
+      }
+      principalMenu();
     }
-  }
-
-  template <typename T>
-  void checkForDetails(int opt, std::string name, const std::vector<T> &data) {
-    if (opt == 1) {
-      system("clear");
-
-      displayHeader(name);
-      Title(name);
-      MenuInfo(data);
-      Footer();
-      std::cout << std::endl;
-
-      int id;
-      std::cout << "Select " << name << " Id to see details: ";
-      std::cin >> id;
-
-      system("clear");
-
-      viewDetails(id, data);
-    }
-    principalMenu(opt);
-  }
-};
+  };
 
 #endif

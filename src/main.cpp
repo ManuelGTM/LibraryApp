@@ -10,17 +10,19 @@ using namespace std;
 
 void pause();
 void clear();
+void getOpt(int &opt);
 
 int main() {
 
   Menu menu;
   Library library;
 
-  int opt;
+  int opt = 0;
 
   do {
     clear();
-    menu.principalMenu(opt);
+    menu.principalMenu();
+    getOpt(opt);
     switch (opt) {
     case 1:
       menu.userRegistrationMenu(library);
@@ -46,6 +48,8 @@ int main() {
       menu.viewBooksMenu(library.getBooks());
       pause();
       break;
+    case 7:
+      break;
     default:
       cout << "Incorrect Option ";
       pause();
@@ -62,3 +66,4 @@ void pause() {
 }
 
 void clear() { system("clear"); }
+void getOpt(int &opt) { cin >> opt; };
